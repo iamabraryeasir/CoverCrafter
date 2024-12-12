@@ -2,7 +2,7 @@ import React from "react";
 
 function Developers() {
   return (
-    <div className="mt-8">
+    <div className="py-8">
       <h3 className="text-center text-md text-gray-500">
         Application Developed by{" "}
         <a
