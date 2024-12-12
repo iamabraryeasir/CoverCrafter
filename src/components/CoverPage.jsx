@@ -22,6 +22,13 @@ function CoverPage({ formData }) {
         <p>Teacher: {formData.teacherName}</p>
         <p>Teacher Designation: {formData.teacherDesignation}</p>
       </div>
+      <button
+        type="submit"
+        disabled={!isFormValid()}
+        className="px-4 py-2 rounded-md font-poppins transition-all duration-300 bg-blue-500 text-white hover:bg-blue-600"
+      >
+        Generate Cover Page
+      </button>
     </div>
   );
 }

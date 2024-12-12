@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Navbar, UserInputForm, CoverPage, Developers } from "./components/index";
+import {
+  Navbar,
+  UserInputForm,
+  CoverPage,
+  Developers,
+} from "./components/index";
 
 function App() {
   const [formData, setFormData] = useState(null);
