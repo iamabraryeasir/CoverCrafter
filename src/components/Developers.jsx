@@ -1,9 +1,7 @@
-import React from "react";
-
 function Developers() {
   return (
     <div className="py-8">
-      <h3 className="text-center text-md text-gray-500">
+      <h3 className="text-center text-md text-gray-500 dark:text-white">
         Application Developed by{" "}
         <a
           href="https://github.com/iamabraryeasir"
