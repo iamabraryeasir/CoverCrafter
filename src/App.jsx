@@ -5,6 +5,7 @@ import {
   UserInputForm,
   CoverPage,
   Developers,
+  CoverPageGenerator,
 } from "./components/index";
 
 function App() {
@@ -20,6 +21,9 @@ function App() {
     const savedTheme = localStorage.getItem("theme") === "dark";
     setDarkMode(savedTheme);
     document.documentElement.classList.toggle("dark", savedTheme);
+
+    const savedFormData = JSON.parse(localStorage.getItem("formData"));
+    setFormData(savedFormData);
   }, []);
 
   // Toggle theme and save preference
@@ -31,7 +35,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="font-poppins">
+      <div className="font-poppins px-3">
         <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
         <Routes>
           <Route
@@ -40,7 +44,7 @@ function App() {
           />
           <Route
             path="/cover-page"
-            element={<CoverPage formData={formData} />}
+            element={<CoverPageGenerator formData={formData} />}
           />
         </Routes>
         <Developers />

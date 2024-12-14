@@ -120,6 +120,8 @@ const UserInputForm = ({ onSubmit }) => {
     e.preventDefault();
     onSubmit(formData);
     navigate("/cover-page");
+
+    localStorage.setItem("formData", JSON.stringify(formData));
   };
 
   const isFormValid = () => {

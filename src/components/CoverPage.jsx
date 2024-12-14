@@ -1,28 +1,70 @@
-function CoverPage({ formData }) {
-  if (!formData) {
-    return (
-      <div className="max-w-5xl mx-auto p-8 text-center">No data available</div>
-    );
-  }
+import {
+  Font,
+  Text,
+  Document,
+  Page,
+  View,
+  StyleSheet,
+} from "@react-pdf/renderer";
 
+// Registering Custom Font
+Font.register({
+  family: "Poppins",
+  fonts: [
+    {
+      src: "/fonts/Poppins-Regular.ttf",
+      fontWeight: 400,
+    },
+    {
+      src: "/fonts/Poppins-SemiBold.ttf",
+      fontWeight: 600,
+    },
+  ],
+});
+
+const styles = StyleSheet.create({
+  container: {
+    padding: "0.35in",
+    fontFamily: "Poppins",
+  },
+
+  border: {
+    border: "2px solid black",
+    padding: "0.25in",
+  },
+
+  pageTitle: {
+    textAlign: "center",
+    textTransform: "uppercase",
+    fontWeight: "semibold",
+    fontSize: 25,
+  },
+});
+
+function CoverPage({ formData }) {
   return (
-    <div className="max-w-5xl mx-auto p-8">
-      <div className="space-y-4">
-        <p>Course Code: {formData.courseCode}</p>
-        <p>Report Number: {formData.reportNumber}</p>
-        <p>Report Name: {formData.reportName}</p>
-        <p>Date of Solving: {formData.dateOfSolving}</p>
-        <p>Date of Submission: {formData.dateOfSubmission}</p>
-        <p>Student Name: {formData.nameOfStudent}</p>
-        <p>Student ID: {formData.studentID}</p>
-        <p>Department: {formData.department}</p>
-        <p>Batch: {formData.batch}</p>
-        <p>Semester: {formData.semester}</p>
-        <p>Section: {formData.section}</p>
-        <p>Teacher: {formData.teacherName}</p>
-        <p>Teacher Designation: {formData.teacherDesignation}</p>
-      </div>
-    </div>
+    <Document>
+      <Page size="A4">
+        <View style={styles.container}>
+          <View style={styles.border}>
+            <Text style={styles.pageTitle}>Premier University Chattagram</Text>
+            <Text>Course Code: {formData.courseCode}</Text>
+            <Text>Report Number: {formData.reportNumber}</Text>
+            <Text>Report Name: {formData.reportName}</Text>
+            <Text>Date of Solving: {formData.dateOfSolving}</Text>
+            <Text>Date of Submission: {formData.dateOfSubmission}</Text>
+            <Text>Student Name: {formData.nameOfStudent}</Text>
+            <Text>Student ID: {formData.studentID}</Text>
+            <Text>Department: {formData.department}</Text>
+            <Text>Batch: {formData.batch}</Text>
+            <Text>Semester: {formData.semester}</Text>
+            <Text>Section: {formData.section}</Text>
+            <Text>Teacher: {formData.teacherName}</Text>
+            <Text>Teacher Designation: {formData.teacherDesignation}</Text>
+          </View>
+        </View>
+      </Page>
+    </Document>
   );
 }
 

@@ -4,6 +4,7 @@ import InputField from "./InputField";
 import UserInputForm from "./UserInputForm";
 import Developers from "./Developers";
 import DarkModeToggle from "./DarkModeToggle";
+import CoverPageGenerator from "./CoverPageGenerator";
 
 export {
   Navbar,
@@ -12,4 +13,5 @@ export {
   UserInputForm,
   Developers,
   DarkModeToggle,
+  CoverPageGenerator,
 };
