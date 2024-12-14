@@ -10,7 +10,22 @@ import {
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
-  const [formData, setFormData] = useState(null);
+  const [formData, setFormData] = useState({
+    courseTitle: "",
+    courseCode: "",
+    reportNumber: "",
+    reportName: "",
+    dateOfSolving: "",
+    dateOfSubmission: "",
+    nameOfStudent: "",
+    studentID: "",
+    department: "",
+    batch: "",
+    semester: "",
+    section: "",
+    teacherName: "",
+    teacherDesignation: "",
+  });
 
   const handleFormSubmit = (data) => {
     setFormData(data);
@@ -23,7 +38,10 @@ function App() {
     document.documentElement.classList.toggle("dark", savedTheme);
 
     const savedFormData = JSON.parse(localStorage.getItem("formData"));
-    setFormData(savedFormData);
+
+    if (savedFormData) {
+      setFormData(savedFormData);
+    }
   }, []);
 
   // Toggle theme and save preference
@@ -40,7 +58,13 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<UserInputForm onSubmit={handleFormSubmit} />}
+            element={
+              <UserInputForm
+                onSubmit={handleFormSubmit}
+                formData={formData}
+                setFormData={setFormData}
+              />
+            }
           />
           <Route
             path="/cover-page"

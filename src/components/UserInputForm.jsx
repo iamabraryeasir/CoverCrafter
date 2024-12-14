@@ -1,8 +1,7 @@
-import { useState } from "react";
 import InputField from "./InputField";
 import { useNavigate } from "react-router-dom";
 
-const UserInputForm = ({ onSubmit }) => {
+const UserInputForm = ({ onSubmit, formData, setFormData }) => {
   const inputItemList = [
     {
       label: "Course Title:",
@@ -90,23 +89,6 @@ const UserInputForm = ({ onSubmit }) => {
     },
   ];
 
-  const [formData, setFormData] = useState({
-    courseTitle: "",
-    courseCode: "",
-    reportNumber: "",
-    reportName: "",
-    dateOfSolving: "",
-    dateOfSubmission: "",
-    nameOfStudent: "",
-    studentID: "",
-    department: "",
-    batch: "",
-    semester: "",
-    section: "",
-    teacherName: "",
-    teacherDesignation: "",
-  });
-
   const navigate = useNavigate();
 
   const handleInputChange = (key, value) => {
@@ -124,9 +106,12 @@ const UserInputForm = ({ onSubmit }) => {
     localStorage.setItem("formData", JSON.stringify(formData));
   };
 
-  const isFormValid = () => {
-    return Object.values(formData).every((value) => value.trim() !== "");
-  };
+  const isFormValid = () =>
+    Object.values(formData).every(
+      (value) =>
+        value != null &&
+        (typeof value === "string" ? value.trim() !== "" : !isNaN(value))
+    );
 
   return (
     <form

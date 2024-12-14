@@ -4,7 +4,7 @@ import DarkModeToggle from "./DarkModeToggle";
 function Navbar({ darkMode, toggleDarkMode }) {
   return (
     <div className="max-w-5xl mx-auto">
-      <div className="flex justify-between items-center py-2 px-2 bg-gray-100 rounded-lg mt-3 dark:bg-slate-700 dark:text-white">
+      <div className="flex justify-between items-center p-3 bg-gray-100 rounded-lg mt-3 dark:bg-slate-700 dark:text-white">
         <div className="text-2xl font-bold">
           <NavLink to="/" className="flex items-center gap-2">
             <img src="/printer.png" alt="CoverCrafter" className="w-8 h-8" />
@@ -13,7 +13,7 @@ function Navbar({ darkMode, toggleDarkMode }) {
             </span>
           </NavLink>
         </div>
-        <div>
+        <div className="flex items-center gap-3">
           <DarkModeToggle darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
           <a
             href="https://github.com/iamabraryeasir/CoverCrafter"
