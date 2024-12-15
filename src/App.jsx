@@ -1,17 +1,11 @@
 import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { lazy, Suspense } from "react";
 import { Navbar, Developers } from "./components/index";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import { ErrorBoundary } from "react-error-boundary";
+import { CoverPageGenerator, UserInputForm } from "./components/index";
 
-// Lazy load these components
-const CoverPageGenerator = lazy(() =>
-  import("./components/CoverPageGenerator")
-);
-const UserInputForm = lazy(() => import("./components/UserInputForm"));
-
-// Create a loading component
+// Keep the LoadingSpinner and ErrorFallback components as they are still useful
 const LoadingSpinner = () => (
   <div className="flex justify-center items-center min-h-[200px]">
     <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
@@ -63,24 +57,22 @@ function App() {
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <BrowserRouter>
           <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-          <Suspense fallback={<LoadingSpinner />}>
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <UserInputForm
-                    onSubmit={setFormData}
-                    formData={formData}
-                    setFormData={setFormData}
-                  />
-                }
-              />
-              <Route
-                path="/cover-page"
-                element={<CoverPageGenerator formData={formData} />}
-              />
-            </Routes>
-          </Suspense>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <UserInputForm
+                  onSubmit={setFormData}
+                  formData={formData}
+                  setFormData={setFormData}
+                />
+              }
+            />
+            <Route
+              path="/cover-page"
+              element={<CoverPageGenerator formData={formData} />}
+            />
+          </Routes>
           <Developers />
         </BrowserRouter>
       </ErrorBoundary>
