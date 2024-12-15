@@ -28,7 +28,7 @@ function ErrorFallback({ error }) {
 }
 
 function App() {
-  const [darkMode, setDarkMode] = useLocalStorage("darkMode", false);
+  const [darkMode, setDarkMode] = useLocalStorage("darkMode", true);
   const [formData, setFormData] = useLocalStorage("formData", {
     courseTitle: "",
     courseCode: "",

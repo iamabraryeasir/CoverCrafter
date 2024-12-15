@@ -8,13 +8,12 @@ function Navbar({ darkMode, toggleDarkMode }) {
       <div className="flex justify-between items-center p-3 bg-gray-100 rounded-lg mt-3 dark:bg-slate-700 dark:text-white">
         <div className="text-2xl font-bold">
           <NavLink to="/" className="flex items-center gap-2">
-            <img 
-              src="/printer.png" 
-              alt="CoverCrafter" 
+            <img
+              src="/printer.png"
+              alt="CoverCrafter"
               className="w-8 h-8"
               width={32}
               height={32}
-              loading="lazy"
             />
             <span>
               Cover<span className="text-blue-500">Crafter</span>
