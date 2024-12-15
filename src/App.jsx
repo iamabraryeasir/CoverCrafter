@@ -28,6 +28,7 @@ function App() {
 
   const handleFormSubmit = (data) => {
     setFormData(data);
+    localStorage.setItem("formData", JSON.stringify(formData));
   };
 
   // Load saved theme from localStorage
@@ -49,10 +50,6 @@ function App() {
     document.documentElement.classList.toggle("dark", !darkMode);
     localStorage.setItem("theme", !darkMode ? "dark" : "light");
   };
-
-  useEffect(() => {
-    localStorage.setItem("formData", JSON.stringify(formData));
-  }, [formData]);
 
   return (
     <BrowserRouter>

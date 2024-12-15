@@ -102,6 +102,7 @@ const styles = StyleSheet.create({
   reportDetailsDataContainer: {
     display: "flex",
     flexDirection: "row",
+    alignItems: "flex-start",
     gap: "8px",
   },
 
@@ -112,6 +113,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",
+  },
+
+  reportDetailsData: {
+    width: "60%",
   },
 
   reportFooter: {
@@ -178,7 +183,7 @@ function CoverPage({ formData }) {
         <View style={styles.container}>
           {/* Page Border */}
           <View style={styles.border}>
-            <Text style={styles.pageTitle}>Premier University Chattagram</Text>
+            <Text style={styles.pageTitle}>Premier University Chittagong</Text>
             {/* Department Name */}
             <View style={styles.departmentNameOuterContainer}>
               <View style={styles.departmentNameContainer}>
@@ -206,35 +211,43 @@ function CoverPage({ formData }) {
                   <Text>Course Title</Text>
                   <Text>:</Text>
                 </View>
-                <Text>{formData.courseTitle.trim()}</Text>
+                <Text style={styles.reportDetailsData}>
+                  {formData.courseTitle.trim()}
+                </Text>
               </View>
               <View style={styles.reportDetailsDataContainer}>
                 <View style={styles.reportDetailsTitle}>
                   <Text>Course Code</Text>
                   <Text>:</Text>
                 </View>
-                <Text>{formData.courseCode.trim()}</Text>
+                <Text style={styles.reportDetailsData}>
+                  {formData.courseCode.trim()}
+                </Text>
               </View>
               <View style={styles.reportDetailsDataContainer}>
                 <View style={styles.reportDetailsTitle}>
                   <Text>Report Number</Text>
                   <Text>:</Text>
                 </View>
-                <Text>{formData.reportNumber.trim()}</Text>
+                <Text style={styles.reportDetailsData}>
+                  {formData.reportNumber.trim()}
+                </Text>
               </View>
               <View style={styles.reportDetailsDataContainer}>
                 <View style={styles.reportDetailsTitle}>
                   <Text>Report Name</Text>
                   <Text>:</Text>
                 </View>
-                <Text>{formData.reportName.trim()}</Text>
+                <Text style={styles.reportDetailsData}>
+                  {formData.reportName.trim()}
+                </Text>
               </View>
               <View style={styles.reportDetailsDataContainer}>
                 <View style={styles.reportDetailsTitle}>
                   <Text>Date of Solving</Text>
                   <Text>:</Text>
                 </View>
-                <Text>
+                <Text style={styles.reportDetailsData}>
                   {formData.dateOfSolving.toLocaleDateString("hi-IN")}
                 </Text>
               </View>
@@ -243,7 +256,7 @@ function CoverPage({ formData }) {
                   <Text>Date of Submission</Text>
                   <Text>:</Text>
                 </View>
-                <Text>
+                <Text style={styles.reportDetailsData}>
                   {formData.dateOfSubmission.toLocaleDateString("hi-IN")}
                 </Text>
               </View>
@@ -311,7 +324,12 @@ function CoverPage({ formData }) {
                 </View>
                 <View style={styles.reportFooterDetails}>
                   <Text style={{ fontWeight: "medium" }}>Teacher's Name:</Text>
-                  <Text>{formData.teacherName.trim()}</Text>
+                  <Text
+                    style={{ wordBreak: "keep-all" }}
+                    hyphenationCallback={(word) => [word]}
+                  >
+                    {formData.teacherName.trim()}
+                  </Text>
                   <Text>{formData.teacherDesignation.trim()}</Text>
                 </View>
               </View>
