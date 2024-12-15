@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
   Navbar,
   UserInputForm,
-  CoverPage,
   Developers,
   CoverPageGenerator,
 } from "./components/index";
@@ -50,6 +49,10 @@ function App() {
     document.documentElement.classList.toggle("dark", !darkMode);
     localStorage.setItem("theme", !darkMode ? "dark" : "light");
   };
+
+  useEffect(() => {
+    localStorage.setItem("formData", JSON.stringify(formData));
+  }, [formData]);
 
   return (
     <BrowserRouter>

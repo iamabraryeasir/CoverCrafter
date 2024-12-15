@@ -18,7 +18,7 @@ function Navbar({ darkMode, toggleDarkMode }) {
           <a
             href="https://github.com/iamabraryeasir/CoverCrafter"
             target="_blank"
-            className="bg-blue-500 text-white px-4 py-2 rounded-md"
+            className="bg-blue-500 text-white px-4 py-2 rounded-md hidden md:block"
           >
             GitHub
           </a>

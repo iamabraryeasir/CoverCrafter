@@ -102,7 +102,6 @@ const UserInputForm = ({ onSubmit, formData, setFormData }) => {
     e.preventDefault();
     onSubmit(formData);
     navigate("/cover-page");
-
     localStorage.setItem("formData", JSON.stringify(formData));
   };
 
@@ -113,6 +112,25 @@ const UserInputForm = ({ onSubmit, formData, setFormData }) => {
         (typeof value === "string" ? value.trim() !== "" : !isNaN(value))
     );
 
+  const handleClearInput = () => {
+    setFormData({
+      courseTitle: "",
+      courseCode: "",
+      reportNumber: "",
+      reportName: "",
+      dateOfSolving: "",
+      dateOfSubmission: "",
+      nameOfStudent: "",
+      studentID: "",
+      department: "",
+      batch: "",
+      semester: "",
+      section: "",
+      teacherName: "",
+      teacherDesignation: "",
+    });
+  };
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -121,6 +139,7 @@ const UserInputForm = ({ onSubmit, formData, setFormData }) => {
       {inputItemList.map((item) => (
         <InputField
           key={item.key}
+          id={item.key}
           label={item.label}
           placeholder={item.placeholder}
           value={formData[item.key]}
@@ -139,6 +158,14 @@ const UserInputForm = ({ onSubmit, formData, setFormData }) => {
         }`}
       >
         Generate Cover Page
+      </button>
+
+      <button
+        type="button"
+        onClick={handleClearInput}
+        className="md:hidden px-4 py-2 rounded-md bg-red-500/80"
+      >
+        Clear Input Fields
       </button>
     </form>
   );
