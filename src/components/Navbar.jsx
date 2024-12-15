@@ -14,6 +14,7 @@ function Navbar({ darkMode, toggleDarkMode }) {
               className="w-8 h-8"
               width={32}
               height={32}
+              loading="lazy"
             />
             <span>
               Cover<span className="text-blue-500">Crafter</span>

@@ -10,11 +10,15 @@ export default defineConfig({
       output: {
         manualChunks: {
           'react-vendor': ['react', 'react-dom'],
-          'pdf-vendor': ['@react-pdf/renderer']
+          'pdf-vendor': ['@react-pdf/renderer'],
+          'router': ['react-router-dom']
         }
       }
     },
-    chunkSizeWarningLimit: 1000
+    chunkSizeWarningLimit: 1000,
+    cssCodeSplit: true,
+    sourcemap: false,
+    reportCompressedSize: false
   },
   test: {
     globals: true,
