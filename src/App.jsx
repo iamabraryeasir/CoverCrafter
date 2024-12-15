@@ -5,13 +5,6 @@ import { useLocalStorage } from "./hooks/useLocalStorage";
 import { ErrorBoundary } from "react-error-boundary";
 import { CoverPageGenerator, UserInputForm } from "./components/index";
 
-// Keep the LoadingSpinner and ErrorFallback components as they are still useful
-const LoadingSpinner = () => (
-  <div className="flex justify-center items-center min-h-[200px]">
-    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
-  </div>
-);
-
 function ErrorFallback({ error }) {
   return (
     <div className="max-w-5xl mx-auto p-8 text-center">
