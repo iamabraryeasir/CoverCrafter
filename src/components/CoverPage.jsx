@@ -74,7 +74,14 @@ const CoverPage = ({ formData }) => {
             <View style={styles.reportDetailsContainer}>
               <DetailRow title="Course Title" value={formData.courseTitle} />
               <DetailRow title="Course Code" value={formData.courseCode} />
-              <DetailRow title="Report Number" value={formData.reportNumber} />
+              <DetailRow
+                title="Report Number"
+                value={
+                  formData.reportNumber < 10
+                    ? `0${formData.reportNumber}`
+                    : formData.reportNumber
+                }
+              />
               <DetailRow title="Report Name" value={formData.reportName} />
               <DetailRow
                 title="Date of Solving"
