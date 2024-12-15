@@ -1,93 +1,10 @@
 import InputField from "./InputField";
 import { useNavigate } from "react-router-dom";
+import { useCallback } from "react";
+import { INPUT_FIELDS } from "../helpers/formFields";
 
 const UserInputForm = ({ onSubmit, formData, setFormData }) => {
-  const inputItemList = [
-    {
-      label: "Course Title:",
-      placeholder: "Enter course title",
-      key: "courseTitle",
-      inputType: "text",
-    },
-    {
-      label: "Course Code:",
-      placeholder: "Enter course code",
-      key: "courseCode",
-      inputType: "text",
-    },
-    {
-      label: "Report Number:",
-      placeholder: "Enter report number",
-      key: "reportNumber",
-      inputType: "number",
-    },
-    {
-      label: "Report Name:",
-      placeholder: "Enter report name",
-      key: "reportName",
-      inputType: "text",
-    },
-    {
-      label: "Date of Solving:    ",
-      placeholder: "Enter date of solving",
-      key: "dateOfSolving",
-      inputType: "date",
-    },
-    {
-      label: "Date of Submission:",
-      placeholder: "Enter date of submission",
-      key: "dateOfSubmission",
-      inputType: "date",
-    },
-    {
-      label: "Name of the Student:",
-      placeholder: "Enter name of the student",
-      key: "nameOfStudent",
-      inputType: "text",
-    },
-    {
-      label: "Student ID:",
-      placeholder: "Enter student ID",
-      key: "studentID",
-      inputType: "text",
-    },
-    {
-      label: "Department:",
-      placeholder: "Enter department",
-      key: "department",
-      inputType: "text",
-    },
-    {
-      label: "Batch:",
-      placeholder: "Enter batch",
-      key: "batch",
-      inputType: "text",
-    },
-    {
-      label: "Semester:",
-      placeholder: "Enter semester",
-      key: "semester",
-      inputType: "text",
-    },
-    {
-      label: "Section:",
-      placeholder: "Enter section",
-      key: "section",
-      inputType: "text",
-    },
-    {
-      label: "Teacher Name:",
-      placeholder: "Enter teacher name",
-      key: "teacherName",
-      inputType: "text",
-    },
-    {
-      label: "Teacher Designation:",
-      placeholder: "Enter teacher designation",
-      key: "teacherDesignation",
-      inputType: "text",
-    },
-  ];
+  const inputItemList = INPUT_FIELDS;
 
   const navigate = useNavigate();
 
@@ -98,19 +15,20 @@ const UserInputForm = ({ onSubmit, formData, setFormData }) => {
     }));
   };
 
+  const isFormValid = useCallback((data) => {
+    return Object.values(data).every(
+      (value) =>
+        value != null &&
+        (typeof value === "string" ? value.trim() !== "" : !isNaN(value))
+    );
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(formData);
     navigate("/cover-page");
     localStorage.setItem("formData", JSON.stringify(formData));
   };
-
-  const isFormValid = () =>
-    Object.values(formData).every(
-      (value) =>
-        value != null &&
-        (typeof value === "string" ? value.trim() !== "" : !isNaN(value))
-    );
 
   const handleClearInput = () => {
     setFormData({
@@ -150,9 +68,9 @@ const UserInputForm = ({ onSubmit, formData, setFormData }) => {
 
       <button
         type="submit"
-        disabled={!isFormValid()}
+        disabled={!isFormValid(formData)}
         className={`md:col-span-3 px-4 py-2 rounded-md font-poppins transition-all duration-300 ${
-          isFormValid()
+          isFormValid(formData)
             ? "bg-blue-500 text-white hover:bg-blue-600"
             : "bg-blue-200 text-blue-400 dark:text-slate-600 cursor-not-allowed hover:bg-blue-200 dark:bg-slate-500"
         }`}

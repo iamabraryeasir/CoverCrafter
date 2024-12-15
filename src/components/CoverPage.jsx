@@ -1,189 +1,55 @@
-import {
-  Font,
-  Text,
-  Document,
-  Page,
-  View,
-  StyleSheet,
-  Image,
-} from "@react-pdf/renderer";
+// CoverPage.jsx
+import { memo } from "react";
+import PropTypes from "prop-types";
+import { Document, Page, View, Text, Image } from "@react-pdf/renderer";
+import { styles } from "../helpers/CoverPage.styles";
+import { registerFonts } from "../helpers/fonts";
 
-// Registering Custom Font
-Font.register({
-  family: "Poppins",
-  fonts: [
-    {
-      src: "/fonts/Poppins-Regular.ttf",
-      fontWeight: 400,
-    },
-    {
-      src: "/fonts/Poppins-Medium.ttf",
-      fontWeight: 500,
-    },
-    {
-      src: "/fonts/Poppins-SemiBold.ttf",
-      fontWeight: 600,
-    },
-  ],
-});
+// Register fonts
+registerFonts();
 
-const styles = StyleSheet.create({
-  container: {
-    padding: "0.35in",
-    fontFamily: "Poppins",
-  },
+// Reusable components
+const DetailRow = memo(({ title, value }) => (
+  <View style={styles.reportDetailsDataContainer}>
+    <View style={styles.reportDetailsTitle}>
+      <Text>{title}</Text>
+      <Text>:</Text>
+    </View>
+    <Text
+      style={styles.reportDetailsData}
+      hyphenationCallback={(word) => [word]}
+    >
+      {value.trim()}
+    </Text>
+  </View>
+));
 
-  border: {
-    border: "2px solid black",
-    padding: "0.25in",
-    height: "100%",
-  },
+const FooterDetailRow = memo(({ title, value }) => (
+  <View style={styles.reportFooterDetailsDataContainer}>
+    <View style={styles.reportFooterDetailsDataTitle}>
+      <Text>{title}</Text>
+      <Text>:</Text>
+    </View>
+    <Text
+      style={{ wordBreak: "keep-all" }}
+      hyphenationCallback={(word) => [word]}
+    >
+      {value.trim()}
+    </Text>
+  </View>
+));
 
-  pageTitle: {
-    textAlign: "center",
-    textTransform: "uppercase",
-    fontWeight: "semibold",
-    fontSize: 25,
-  },
+const CoverPage = ({ formData }) => {
+  const submissionDate = new Date(formData.dateOfSubmission);
+  const solvingDate = new Date(formData.dateOfSolving);
 
-  imageContainer: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    width: "100%",
-  },
-
-  departmentNameOuterContainer: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
-    padding: "20px 0",
-  },
-
-  departmentNameContainer: {
-    border: "1px solid black",
-    width: "70%",
-    padding: "5px 10px",
-  },
-
-  departmentName: {
-    textAlign: "center",
-    fontSize: 13,
-  },
-
-  labReportHeadingContainer: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    marginTop: "20px",
-  },
-
-  labReportHeading: {
-    textAlign: "center",
-    fontWeight: 500,
-    fontSize: 17,
-  },
-
-  labReportHeadingUnderline: {
-    width: "25%",
-    borderBottom: "2px solid black",
-  },
-
-  reportDetailsContainer: {
-    display: "flex",
-    flexDirection: "column",
-    fontSize: 14,
-    gap: "5px",
-    marginBottom: "50px",
-    marginTop: "20px",
-  },
-
-  reportDetailsDataContainer: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "flex-start",
-    gap: "8px",
-  },
-
-  reportDetailsTitle: {
-    width: "40%",
-    fontWeight: "medium",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    flexDirection: "row",
-  },
-
-  reportDetailsData: {
-    width: "60%",
-  },
-
-  reportFooter: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "start",
-    fontSize: 14,
-    gap: "10px",
-  },
-
-  reportFooterLeft: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "5px",
-    width: "50%",
-  },
-
-  reportFooterRight: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "5px",
-    width: "50%",
-  },
-
-  reportFooterTitle: {
-    paddingLeft: "10px",
-    fontWeight: "medium",
-  },
-
-  reportFooterDetails: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "5px",
-    border: "1px solid black",
-    padding: "10px",
-    height: "160px",
-    fontSize: 11.5,
-  },
-
-  reportFooterDetailsDataContainer: {
-    width: "100%",
-    display: "flex",
-    flexDirection: "row",
-    gap: "8px",
-  },
-
-  reportFooterDetailsDataTitle: {
-    width: "35%",
-    fontWeight: "medium",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    flexDirection: "row",
-  },
-});
-
-function CoverPage({ formData }) {
-  formData.dateOfSolving = new Date(formData.dateOfSolving);
-  formData.dateOfSubmission = new Date(formData.dateOfSubmission);
   return (
     <Document title={`${formData.courseTitle} Cover Page`}>
       <Page size="A4">
-        {/* Main Page Container */}
         <View style={styles.container}>
-          {/* Page Border */}
           <View style={styles.border}>
             <Text style={styles.pageTitle}>Premier University Chittagong</Text>
+
             {/* Department Name */}
             <View style={styles.departmentNameOuterContainer}>
               <View style={styles.departmentNameContainer}>
@@ -201,65 +67,23 @@ function CoverPage({ formData }) {
             {/* Lab Report Heading */}
             <View style={styles.labReportHeadingContainer}>
               <Text style={styles.labReportHeading}>Lab Report</Text>
-              <View style={styles.labReportHeadingUnderline}></View>
+              <View style={styles.labReportHeadingUnderline} />
             </View>
 
             {/* Report Details */}
             <View style={styles.reportDetailsContainer}>
-              <View style={styles.reportDetailsDataContainer}>
-                <View style={styles.reportDetailsTitle}>
-                  <Text>Course Title</Text>
-                  <Text>:</Text>
-                </View>
-                <Text style={styles.reportDetailsData}>
-                  {formData.courseTitle.trim()}
-                </Text>
-              </View>
-              <View style={styles.reportDetailsDataContainer}>
-                <View style={styles.reportDetailsTitle}>
-                  <Text>Course Code</Text>
-                  <Text>:</Text>
-                </View>
-                <Text style={styles.reportDetailsData}>
-                  {formData.courseCode.trim()}
-                </Text>
-              </View>
-              <View style={styles.reportDetailsDataContainer}>
-                <View style={styles.reportDetailsTitle}>
-                  <Text>Report Number</Text>
-                  <Text>:</Text>
-                </View>
-                <Text style={styles.reportDetailsData}>
-                  {formData.reportNumber.trim()}
-                </Text>
-              </View>
-              <View style={styles.reportDetailsDataContainer}>
-                <View style={styles.reportDetailsTitle}>
-                  <Text>Report Name</Text>
-                  <Text>:</Text>
-                </View>
-                <Text style={styles.reportDetailsData}>
-                  {formData.reportName.trim()}
-                </Text>
-              </View>
-              <View style={styles.reportDetailsDataContainer}>
-                <View style={styles.reportDetailsTitle}>
-                  <Text>Date of Solving</Text>
-                  <Text>:</Text>
-                </View>
-                <Text style={styles.reportDetailsData}>
-                  {formData.dateOfSolving.toLocaleDateString("hi-IN")}
-                </Text>
-              </View>
-              <View style={styles.reportDetailsDataContainer}>
-                <View style={styles.reportDetailsTitle}>
-                  <Text>Date of Submission</Text>
-                  <Text>:</Text>
-                </View>
-                <Text style={styles.reportDetailsData}>
-                  {formData.dateOfSubmission.toLocaleDateString("hi-IN")}
-                </Text>
-              </View>
+              <DetailRow title="Course Title" value={formData.courseTitle} />
+              <DetailRow title="Course Code" value={formData.courseCode} />
+              <DetailRow title="Report Number" value={formData.reportNumber} />
+              <DetailRow title="Report Name" value={formData.reportName} />
+              <DetailRow
+                title="Date of Solving"
+                value={solvingDate.toLocaleDateString("hi-IN")}
+              />
+              <DetailRow
+                title="Date of Submission"
+                value={submissionDate.toLocaleDateString("hi-IN")}
+              />
             </View>
 
             {/* Report Footer */}
@@ -269,55 +93,24 @@ function CoverPage({ formData }) {
                   <Text>Submitted By: </Text>
                 </View>
                 <View style={styles.reportFooterDetails}>
-                  <View style={styles.reportFooterDetailsDataContainer}>
-                    <View style={styles.reportFooterDetailsDataTitle}>
-                      <Text>Name</Text>
-                      <Text>:</Text>
-                    </View>
-                    <Text>{formData.nameOfStudent.trim()}</Text>
-                  </View>
-
-                  <View style={styles.reportFooterDetailsDataContainer}>
-                    <View style={styles.reportFooterDetailsDataTitle}>
-                      <Text>Student ID</Text>
-                      <Text>:</Text>
-                    </View>
-                    <Text>{formData.studentID.trim()}</Text>
-                  </View>
-
-                  <View style={styles.reportFooterDetailsDataContainer}>
-                    <View style={styles.reportFooterDetailsDataTitle}>
-                      <Text>Department</Text>
-                      <Text>:</Text>
-                    </View>
-                    <Text>{formData.department.trim()}</Text>
-                  </View>
-
-                  <View style={styles.reportFooterDetailsDataContainer}>
-                    <View style={styles.reportFooterDetailsDataTitle}>
-                      <Text>Batch</Text>
-                      <Text>:</Text>
-                    </View>
-                    <Text>{formData.batch.trim()}</Text>
-                  </View>
-
-                  <View style={styles.reportFooterDetailsDataContainer}>
-                    <View style={styles.reportFooterDetailsDataTitle}>
-                      <Text>Semester</Text>
-                      <Text>:</Text>
-                    </View>
-                    <Text>{formData.semester.trim()}</Text>
-                  </View>
-
-                  <View style={styles.reportFooterDetailsDataContainer}>
-                    <View style={styles.reportFooterDetailsDataTitle}>
-                      <Text>Section</Text>
-                      <Text>:</Text>
-                    </View>
-                    <Text>{formData.section.trim()}</Text>
-                  </View>
+                  <FooterDetailRow
+                    title="Name"
+                    value={formData.nameOfStudent}
+                  />
+                  <FooterDetailRow
+                    title="Student ID"
+                    value={formData.studentID}
+                  />
+                  <FooterDetailRow
+                    title="Department"
+                    value={formData.department}
+                  />
+                  <FooterDetailRow title="Batch" value={formData.batch} />
+                  <FooterDetailRow title="Semester" value={formData.semester} />
+                  <FooterDetailRow title="Section" value={formData.section} />
                 </View>
               </View>
+
               <View style={styles.reportFooterRight}>
                 <View style={styles.reportFooterTitle}>
                   <Text>Submitted To: </Text>
@@ -330,7 +123,15 @@ function CoverPage({ formData }) {
                   >
                     {formData.teacherName.trim()}
                   </Text>
-                  <Text>{formData.teacherDesignation.trim()}</Text>
+                  <Text
+                    style={{ wordBreak: "keep-all" }}
+                    hyphenationCallback={(word) => [word]}
+                  >
+                    {formData.teacherDesignation.trim()}
+                  </Text>
+                  <Text style={{ fontWeight: 500, marginTop: 30 }}>
+                    Signature: {".".repeat(50)}
+                  </Text>
                 </View>
               </View>
             </View>
@@ -339,6 +140,25 @@ function CoverPage({ formData }) {
       </Page>
     </Document>
   );
-}
+};
 
-export default CoverPage;
+CoverPage.propTypes = {
+  formData: PropTypes.shape({
+    courseTitle: PropTypes.string.isRequired,
+    courseCode: PropTypes.string.isRequired,
+    reportNumber: PropTypes.string.isRequired,
+    reportName: PropTypes.string.isRequired,
+    dateOfSolving: PropTypes.string.isRequired,
+    dateOfSubmission: PropTypes.string.isRequired,
+    nameOfStudent: PropTypes.string.isRequired,
+    studentID: PropTypes.string.isRequired,
+    department: PropTypes.string.isRequired,
+    batch: PropTypes.string.isRequired,
+    semester: PropTypes.string.isRequired,
+    section: PropTypes.string.isRequired,
+    teacherName: PropTypes.string.isRequired,
+    teacherDesignation: PropTypes.string.isRequired,
+  }).isRequired,
+};
+
+export default memo(CoverPage);
