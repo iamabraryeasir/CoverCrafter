@@ -3,10 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useCallback } from "react";
 import { INPUT_FIELDS } from "../helpers/formFields";
 
-// Firebase Imports
-import { collection, addDoc } from "firebase/firestore";
-import { db } from "../helpers/firebase";
-
 const UserInputForm = ({ onSubmit, formData, setFormData }) => {
   const inputItemList = INPUT_FIELDS;
 
@@ -27,24 +23,8 @@ const UserInputForm = ({ onSubmit, formData, setFormData }) => {
     );
   }, []);
 
-  const sentDbInsights = async () => {
-    try {
-      const docRef = await addDoc(collection(db, "insights"), {
-        batch: formData.batch,
-        department: formData.department,
-        section: formData.section,
-        semester: formData.semester,
-        studentName: formData.nameOfStudent,
-        timestamp: new Date().toISOString(),
-      });
-    } catch (error) {
-      console.log("Error Sending Form Data to Firebase:", error);
-    }
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    sentDbInsights();
     onSubmit(formData);
     navigate("/cover-page");
     localStorage.setItem("formData", JSON.stringify(formData));
