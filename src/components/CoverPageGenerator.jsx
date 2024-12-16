@@ -23,7 +23,7 @@ const CoverPageGenerator = memo(({ formData }) => {
   }
 
   return (
-    <div className="max-w-5xl mx-auto py-5">
+    <div className="max-w-6xl mx-auto py-5">
       <MobileWarning />
       <ErrorBoundary
         fallback={

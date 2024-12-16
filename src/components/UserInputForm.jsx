@@ -72,7 +72,7 @@ const UserInputForm = ({ onSubmit, formData, setFormData }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 font-poppins"
+      className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 font-poppins"
     >
       {inputItemList.map((item) => (
         <InputField
