@@ -3,10 +3,6 @@ const DEVELOPERS = [
     name: "@Abrar Yeasir",
     url: "https://github.com/iamabraryeasir",
   },
-  {
-    name: "@Rudra Kaiser",
-    url: "https://github.com/rudra-404",
-  },
 ];
 
 const Developers = () => {

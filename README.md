@@ -32,7 +32,6 @@ npm install
 npm run dev
 ```
 
-## Developers
+## Developed By
 
 - [Abrar Yeasir](https://github.com/iamabraryeasir)
-- [Rudra Kaiser](https://github.com/rudra-404)
